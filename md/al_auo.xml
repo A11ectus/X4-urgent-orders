@@ -126,6 +126,17 @@
 									$echo='Urgent / Same Plane'
 								]" />			
 							</do_if>
+							<do_if value="$target.container.dockingallowed.{$ship}">	
+								<set_value name="$text" exact="{12115, 2008}" comment="Dock and Wait, Urgent" />
+								<signal_cue_instantly cue="md.Interact_Menu_API.Add_Action" param = "table[
+									$id = 'order_dock_urgent',
+									$section = $section,
+									$text = $text,
+									$icon = 'order_dockandwait',
+									$callback = InteractMenu_OnDockUrgent,
+									$echo='Immediate'
+								]" />
+							</do_if>
 						</do_if>
 						<cancel_cue cue="this" />
 					</actions>
@@ -217,6 +228,49 @@
 						<reset_cue cue="this" />
 					</actions>
 				</cue>				
+				<cue name="InteractMenu_OnDockUrgent">
+					<conditions>
+						<event_cue_signalled />
+					</conditions>
+					<actions>
+						<set_value name="$destfinal" exact="event.param.$object" />
+						<set_value name="$dockcat" exact="event.param.$echo" />
+												
+						<do_if value="$dockcat == 'Urgent'">
+							<set_value name="$recall" exact="false" />
+						</do_if>
+						<do_else>
+							<set_value name="$recall" exact="true" />
+						</do_else>
+												
+						<do_if value="$dockcat == 'Urgent'">
+							<set_value name="$attackresp" exact="false" />
+						</do_if>
+						<do_else>
+							<set_value name="$attackresp" exact="true" />
+						</do_else>
+
+						<do_if value="$dockcat == 'Urgent'">
+							<set_value name="$immed" exact="true" />
+						</do_if>
+						<do_else>
+							<set_value name="$immed" exact="false" />
+						</do_else>
+						
+						<do_for_each name="$ship" in="@event.param.$selectedplayerships">						
+							<debug_text text="'$ship: ' + $ship + ' (' + @$ship.knownname + ')'" chance="alAUO.$debugChance" />
+							<do_if value="$ship">
+								<create_order name="$order" object="$ship" id="'DockAndWait'" immediate="$immed">
+									<param name="destination" value="$destfinal" />
+									<param name="dockfollowers" value="$recall" />
+									<param name="noattackresponse" value="$attackresp" />
+									<param name="debugchance" value="alAUO.$debugChance" />
+								</create_order>
+							</do_if>
+						</do_for_each>
+						<reset_cue cue="this" />
+					</actions>
+				</cue>								
 				<cue name="OnModInstallComplete">
 					<actions>
 						<set_value name="$debugChance" exact="0" />

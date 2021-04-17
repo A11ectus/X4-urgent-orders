@@ -16,6 +16,7 @@
 		<t id="2005">Fly and Wait, No Recall/Same Plane</t>
 		<t id="2006">Fly and Wait, Urgent</t>
 		<t id="2007">Fly and Wait, Urgent/Same Plane</t>
+		<t id="2008">Dock and Wait, Urgent</t>
 		<!-- Description -->		
 		<t id="3000">Attack, Immediate</t>
 		<t id="3001">Fly and Wait, Immediate</t>
@@ -25,5 +26,6 @@
 		<t id="3005">Fly and Wait, No Recall/Same Plane</t>
 		<t id="3006">Fly and Wait, Urgent</t>
 		<t id="3007">Fly and Wait, Urgent/Same Plane</t>
+		<t id="2008">Dock and Wait, Urgent</t>
 	</page>
 </language>
