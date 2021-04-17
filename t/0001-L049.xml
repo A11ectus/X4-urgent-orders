@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- German -->  
+<language>
+	<!-- "Allectus: Urgent Orders" = "AUO" = "1 21 15" = "12115" in  https://www.boxentriq.com/code-breaking/letters-to-numbers -->
+	<page id="12115" voice="no">
+		<t id="1">Allectus: Urgent Orders</t>
+		<!-- config -->
+		<t id="2">Debug log</t>
+		<t id="3">Do debug function</t>
+		<!-- orders -->
+		<t id="2000">Angriff, sofort</t>
+		<t id="2001">Hinfliegen und warten, sofort</t>
+		<t id="2002">Hinfliegen und warten, sofort/gleiche Höhe</t>
+		<t id="2003">Hinfliegen und warten, gleiche Höhe</t>
+		<t id="2004">Hinfliegen und warten, kein Rückruf</t>
+		<t id="2005">Hinfliegen und warten, kein Rückruf/gleiche Höhe</t>
+		<t id="2006">Hinfliegen und warten, dringend</t>
+		<t id="2007">Hinfliegen und warten, dringend/gleiche Höhe</t>
+		<!-- Description -->		
+		<t id="3000">Angriff, sofort</t>
+		<t id="3001">Hinfliegen und warten, sofort</t>
+		<t id="3002">Hinfliegen und warten, sofort/gleiche Höhe</t>
+		<t id="3003">Hinfliegen und warten, gleiche Höhe</t>
+		<t id="3004">Hinfliegen und warten, kein Rückruf</t>
+		<t id="3005">Hinfliegen und warten, kein Rückruf/gleiche Höhe</t>
+		<t id="3006">Hinfliegen und warten, dringend</t>
+		<t id="3007">Hinfliegen und warten, dringend/gleiche Höhe</t>
+	</page>
+</language>

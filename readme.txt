@@ -1,5 +1,8 @@
-Urgent Orders
-by Allectus
+Urgent Orders:
+============
+By: Allectus
+
+Translation: Chapi22 (DE)
 
 Github: https://github.com/A11ectus/X4-urgent-orders
 Steam: https://steamcommunity.com/sharedfiles/filedetails/?id=2459574093
@@ -55,3 +58,4 @@ Uninstall:
 History:
 ========
 1.0, 2021-04-17: Initial release
+1.1, Unreleased: Added DE translation
