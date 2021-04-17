@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<content id="ws_2459574093" name="Urgent Orders" author="Allectus" version="100" date="2021-04-17" save="false" enabled="1" description="Adds additional high priority orders to the right click menu: Attack-Immediate, Fly-Immediate, Fly-Same Plane, Fly-No Recall, and various combinations thereof." sync="false" lastupdate="1618638192">
+  <dependency id="ws_2042901274" optional="false" name="SirNukes Mod Support APIs"/>
+</content>
