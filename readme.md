@@ -5,7 +5,9 @@ By: Allectus
 Translation: Chapi22 (DE)
 
 Github: https://github.com/A11ectus/X4-urgent-orders
+
 Steam: https://steamcommunity.com/sharedfiles/filedetails/?id=2459574093
+
 Nexus: https://www.nexusmods.com/x4foundations/mods/683/
 
 Mod effects:
