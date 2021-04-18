@@ -45,6 +45,8 @@ Some Notes:
 
 See here for a demonstration: https://youtu.be/JyAwMSAZFuc
 
+V1.1 Release Video: https://www.youtube.com/watch?v=04zg0NxCEbA
+
 Install:
 ========
 -Unzip to 'X4 Foundations/extensions/al_urgent_orders' / subscribe on Steam
