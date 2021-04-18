@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<content id="ws_2459574093" name="Urgent Orders" author="Allectus" version="110" date="2021-04-18" save="false" enabled="1" description="Adds additional high priority orders to the right click menu: Attack-Immediate, Fly-Immediate, Fly-Same Plane, Fly-No Recall, and various combinations thereof." sync="false" lastupdate="1618759410">
+<content id="ws_2459574093" name="Urgent Orders" author="Allectus" version="110" date="2021-04-18" save="false" enabled="1" description="Adds additional high priority orders to the right click menu: Attack-Immediate, Fly-Immediate, Fly-Same Plane, Fly-No Recall, and various combinations thereof." sync="false" lastupdate="1618759768">
   <dependency id="ws_2042901274" optional="false" name="SirNukes Mod Support APIs"/>
   <text language="49" name="Urgent Orders" description="Fügt dem Rechtsklickmenü zusätzliche Befehle mit hoher Priorität hinzu: Angriff sofort, Hinfliegen sofort, Hinfliegen / gleiche Höhe, Hinfliegen / kein Rückruf und verschiedene Kombinationen davon." author="Allectus"/>
 </content>
