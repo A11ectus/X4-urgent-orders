@@ -60,4 +60,4 @@ Uninstall:
 History:
 ========
 1.0, 2021-04-17: Initial release
-1.1, Unreleased: Added DE translation; Added "Dock and Wait, Urgent"; Allowed "Fly..." commands to take other objects as targets; Fixed bug in "...Urgent" commands that would cause them to not properly ignore attacks
+1.1, 2021-04-18: Added DE translation; Added "Dock and Wait, Urgent"; Allowed "Fly..." commands to take other objects as targets; Fixed bug in "...Urgent" commands that would cause them to not properly ignore attacks
