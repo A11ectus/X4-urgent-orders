@@ -16,6 +16,7 @@
 		<t id="2005">Hinfliegen und warten, kein Rückruf/gleiche Höhe</t>
 		<t id="2006">Hinfliegen und warten, dringend</t>
 		<t id="2007">Hinfliegen und warten, dringend/gleiche Höhe</t>
+		<t id="2008">Andocken und warten, Urgent</t>		
 		<!-- Description -->		
 		<t id="3000">Angriff, sofort</t>
 		<t id="3001">Hinfliegen und warten, sofort</t>
@@ -25,5 +26,6 @@
 		<t id="3005">Hinfliegen und warten, kein Rückruf/gleiche Höhe</t>
 		<t id="3006">Hinfliegen und warten, dringend</t>
 		<t id="3007">Hinfliegen und warten, dringend/gleiche Höhe</t>
+		<t id="2008">Andocken und warten, dringend</t>		
 	</page>
 </language>

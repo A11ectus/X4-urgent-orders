@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+
+<diff>
+
+  <add sel="//aiscript/order[@id='DockAt']/params">
+	<param name="noattackresponse" type="internal" default="false" comment="Will not respond to attacks. Read in interrupt.attacked"/>
+	<param name="recallsubordinates" type="internal" default="true" comment="recall subordinates and cancel existing recall subordinate orders. passed in to move.generic."/>
+  </add>
+  
+  <add sel='//aiscript/attention[@min="unknown"]/actions/do_if[@value="$alwaysmove? or (this.sector != $destination.sector) or ((($destination.isclass.ship and not $destination.zone.isclass.highway) or this.zone != $movementdest.zone) and $thisship.bboxdistanceto.{$movementdest} gt 10km)"]/run_script[@name="&apos;move.generic&apos;"]'>
+	<param name="noattackresponse" value="$noattackresponse"/>
+	<param name="recallsubordinates" value="$recallsubordinates"/>
+  </add>
+  
+</diff>

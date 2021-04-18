@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+
+<diff>
+
+  <add sel="//aiscript/order[@id='MoveGeneric']/params">
+	<param name="noattackresponse" type="internal" default="false" comment="Will not respond to attacks. Read in interrupt.attacked"/>
+  </add>
+  
+</diff>

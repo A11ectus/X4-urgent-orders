@@ -43,19 +43,7 @@
 						<do_if value="$ship and $ship.owner == faction.player">
 							<set_value name="$section" exact="'selected_orders'" />						
 							
-							<do_if value="($target.isclass.destructible) and (not ($target.owner == faction.player))">	
-								<set_value name="$text" exact="{12115, 2000}" comment="Attack, Immediate" />
-								<signal_cue_instantly cue="md.Interact_Menu_API.Add_Action" param = "table[
-									$id = 'order_attack_immediate',
-									$section = $section,
-									$text = $text,
-									$icon = 'order_attack',
-									$callback = InteractMenu_OnAttackUrgent,
-									$echo='Immediate'
-								]" />
-							</do_if>							
-							
-							<do_if value="$target.isclass.sector">	
+							<do_if value="$target">	
 								<set_value name="$text" exact="{12115, 2001}" comment="Fly and Wait, Immediate" />
 								<signal_cue_instantly cue="md.Interact_Menu_API.Add_Action" param = "table[
 									$id = 'order_move_immediate',
@@ -126,17 +114,30 @@
 									$echo='Urgent / Same Plane'
 								]" />			
 							</do_if>
-							<do_if value="$target.container.dockingallowed.{$ship}">	
-								<set_value name="$text" exact="{12115, 2008}" comment="Dock and Wait, Urgent" />
+							
+							<do_if value="$target.dockingallowed.{$ship}">	
+								<set_value name="$text" exact="'Dock and Wait, Urgent'" comment="Dock and Wait, Urgent" />
 								<signal_cue_instantly cue="md.Interact_Menu_API.Add_Action" param = "table[
 									$id = 'order_dock_urgent',
 									$section = $section,
 									$text = $text,
 									$icon = 'order_dockandwait',
 									$callback = InteractMenu_OnDockUrgent,
-									$echo='Immediate'
+									$echo='Urgent'
 								]" />
 							</do_if>
+							
+							<do_if value="($target.isclass.destructible) and (not ($target.owner == faction.player))">	
+								<set_value name="$text" exact="{12115, 2000}" comment="Attack, Immediate" />
+								<signal_cue_instantly cue="md.Interact_Menu_API.Add_Action" param = "table[
+									$id = 'order_attack_immediate',
+									$section = $section,
+									$text = $text,
+									$icon = 'order_attack',
+									$callback = InteractMenu_OnAttackUrgent,
+									$echo='Immediate'
+								]" />
+							</do_if>	
 						</do_if>
 						<cancel_cue cue="this" />
 					</actions>
@@ -194,10 +195,10 @@
 						</do_else>
 						
 						<do_if value="$movecat == 'Urgent' or  $movecat == 'Urgent / Same Plane'">
-							<set_value name="$attackresp" exact="false" />
+							<set_value name="$noattackresp" exact="true" />
 						</do_if>
 						<do_else>
-							<set_value name="$attackresp" exact="true" />
+							<set_value name="$noattackresp" exact="false" />
 						</do_else>
 
 						<do_if value="$movecat == 'Immediate' or $movecat == 'Immediate / Same Plane' or $movecat == 'Urgent' or  $movecat == 'Urgent / Same Plane'">
@@ -216,11 +217,11 @@
 									<set_value name="$destfinal" exact="[$destoffsetcomponent, $destoffsetmod]" />
 									
 								</do_if>
-							
+														
 								<create_order name="$order" object="$ship" id="'MoveWait'" immediate="$immed">
 									<param name="destination" value="$destfinal" />
 									<param name="recallsubordinates" value="$recall" />
-									<param name="noattackresponse" value="$attackresp" />
+									<param name="noattackresponse" value="$noattackresp" />
 									<param name="debugchance" value="alAUO.$debugChance" />
 								</create_order>
 							</do_if>
@@ -244,10 +245,10 @@
 						</do_else>
 												
 						<do_if value="$dockcat == 'Urgent'">
-							<set_value name="$attackresp" exact="false" />
+							<set_value name="$noattackresp" exact="true" />
 						</do_if>
 						<do_else>
-							<set_value name="$attackresp" exact="true" />
+							<set_value name="$noattackresp" exact="false" />
 						</do_else>
 
 						<do_if value="$dockcat == 'Urgent'">
@@ -260,10 +261,12 @@
 						<do_for_each name="$ship" in="@event.param.$selectedplayerships">						
 							<debug_text text="'$ship: ' + $ship + ' (' + @$ship.knownname + ')'" chance="alAUO.$debugChance" />
 							<do_if value="$ship">
+							
+								<debug_text text="'$ship: ' + $ship + ' $dockcat: ' + $dockcat + ' $recall: ' + $recall + ' $noattackresp: ' + $noattackresp + ' $immed: ' + $immed" />
 								<create_order name="$order" object="$ship" id="'DockAndWait'" immediate="$immed">
 									<param name="destination" value="$destfinal" />
-									<param name="dockfollowers" value="$recall" />
-									<param name="noattackresponse" value="$attackresp" />
+									<param name="recallsubordinates" value="$recall" />
+									<param name="noattackresponse" value="$noattackresp" />
 									<param name="debugchance" value="alAUO.$debugChance" />
 								</create_order>
 							</do_if>

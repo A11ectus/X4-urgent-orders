@@ -4,6 +4,12 @@
 
   <add sel="//aiscript/order[@id='DockAndWait']/params">
 	<param name="noattackresponse" type="internal" default="false" comment="Will not respond to attacks. Read in interrupt.attacked"/>
+	<param name="recallsubordinates" type="internal" default="true" comment="recall subordinates and cancel existing recall subordinate orders. passed in to move.generic."/>
+  </add>
+  
+  <add sel='//aiscript/attention[@min="unknown"]/actions/do_if[@value="(@this.ship.dock.container != $destination) or (this.ship.dock and (($building and not this.ship.dock.isbuildingallowed) or ($trading and not this.ship.dock.istradingallowed) or (not $allowplayeronly and this.ship.dock.isplayeronly) or ($ventureplatform != this.ship.dock.ventureplatform)))"]/do_if[@value="(not this.ship.parkedat or ((this.ship.parkedat != $destination) and not @this.ship.parkedat.hascontext.{$destination}))"]/create_order[@id="&apos;DockAt&apos;"]'>
+	<param name="noattackresponse" value="$noattackresponse"/>
+	<param name="recallsubordinates" value="$recallsubordinates"/>
   </add>
   
 </diff>

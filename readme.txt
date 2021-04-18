@@ -40,6 +40,8 @@ This mod adds several orders to the right click menu:
 Some Notes:
 
 	* Urgent is as close as I can manage to a force-move.  The ship will not attempt to cancel the order to respond to attacks and critically will not engage it's override flee order if it comes under fire.  This serves as a reasonable escape mechanism for capital ships but may be suicide for fighters as they will fly in a straight line at constant speed (flee behaviour for small ships gives them access to evasive manoeuvres that this command will skip).  Use wisely, commander.
+	
+	* Urgent orders may still be interrupted by the comm-player-for-instructions behavior, which could result in an automatic flee behavior being assigned while it awaits your response.  Either respond to the com and tell them to continue, or allow it to time out (~10 sec) and they will resume the urgent command.  I'm still considering how best to handle this (I'm somewhat reluctant to stop that interrupt due to possible unforseen consequences).  See the v1.1 release video for a breakdown of how it behaves currently.
 
 See here for a demonstration: https://youtu.be/JyAwMSAZFuc
 
@@ -58,4 +60,4 @@ Uninstall:
 History:
 ========
 1.0, 2021-04-17: Initial release
-1.1, Unreleased: Added DE translation
+1.1, Unreleased: Added DE translation; Added "Dock and Wait, Urgent"; Allowed "Fly..." commands to take other objects as targets; Fixed bug in "...Urgent" commands that would cause them to not properly ignore attacks
