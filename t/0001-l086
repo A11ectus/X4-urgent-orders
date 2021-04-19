@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- chinese -->  
+<language id="86">
+	<!-- "Allectus: Urgent Orders" = "AUO" = "1 21 15" = "12115" in  https://www.boxentriq.com/code-breaking/letters-to-numbers -->
+	<page id="12115" voice="no">
+		<t id="1">Allectus: 立即命令</t>
+		<!-- config -->
+		<t id="2">调试日志</t>
+		<t id="3">打开调试功能</t>
+		<!-- orders -->
+		<t id="2000">攻击,立即</t>
+		<t id="2001">飞往并等待,立即</t>
+		<t id="2002">飞往并等待,立即/保持高度</t>
+		<t id="2003">飞往并等待,保持高度</t>
+		<t id="2004">飞往并等待,禁召下属</t>
+		<t id="2005">飞往并等待,禁召下属/保持高度</t>
+		<t id="2006">飞往并等待,紧急</t>
+		<t id="2007">飞往并等待,紧急/保持高度</t>
+		<!-- Description -->		
+		<t id="3000">攻击, 立即</t>
+		<t id="3001">飞往并等待,立即</t>
+		<t id="3002">飞往并等待,立即/保持高度</t>
+		<t id="3003">飞往并等待,保持高度</t>
+		<t id="3004">飞往并等待,禁召下属</t>
+		<t id="3005">飞往并等待,禁召下属/保持高度</t>
+		<t id="3006">飞往并等待,紧急</t>
+		<t id="3007">飞往并等待,紧急/保持高度</t>
+    <t id="2008">停靠并等待,紧急</t>
+	</page>
+</language>
