@@ -115,7 +115,7 @@
 								]" />			
 							</do_if>
 							
-							<do_if value="$target.dockingallowed.{$ship}">	
+							<do_if value="@$target.dockingallowed.{$ship}">	
 								<set_value name="$text" exact="'Dock and Wait, Urgent'" comment="Dock and Wait, Urgent" />
 								<signal_cue_instantly cue="md.Interact_Menu_API.Add_Action" param = "table[
 									$id = 'order_dock_urgent',

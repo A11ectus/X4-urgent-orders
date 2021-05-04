@@ -39,7 +39,6 @@ This mod adds several orders to the right click menu:
 
 * AI Order: Dock and Wait, Urgent -- Dock and Wait, but the order is placed at the front of the order queue, the ships do not respond to enemy attacks, and the ships do not recall subordinates
 
-
 Some Notes:
 
 	* Urgent is as close as I can manage to a force-move.  The ship will not attempt to cancel the order to respond to attacks and critically will not engage it's override flee order if it comes under fire.  This serves as a reasonable escape mechanism for capital ships but may be suicide for fighters as they will fly in a straight line at constant speed (flee behaviour for small ships gives them access to evasive manoeuvres that this command will skip).  Use wisely, commander.
