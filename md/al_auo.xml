@@ -158,12 +158,17 @@
 							<do_else>
 								<set_value name="$orderships" exact="[@player.entity.$SelectedFleetCommander]" />
 							</do_else>
+							
+							<substitute_text text="$attackcat">
+								<replace string="'Wing: '" with="''" />
+							</substitute_text>
+							
 						</do_if>
 						<do_else>
 							<set_value name="$orderships" exact="@event.param.$selectedplayerships" />
 						</do_else>
 
-						<do_if value="$attackcat == 'Immediate' or $attackcat == 'Wing: Immediate'">
+						<do_if value="$attackcat == 'Immediate'">
 							<set_value name="$immed" exact="true" />
 						</do_if>
 						<do_else>
@@ -201,33 +206,38 @@
 							<do_else>
 								<set_value name="$orderships" exact="[@player.entity.$SelectedFleetCommander]" />
 							</do_else>
+							
+							<substitute_text text="$movecat">
+								<replace string="'Wing: '" with="''" />
+							</substitute_text>
+							
 						</do_if>
 						<do_else>
 							<set_value name="$orderships" exact="@event.param.$selectedplayerships" />
 						</do_else>
 						
-						<do_if value="$movecat == 'No Recall' or $movecat == 'No Recall / Same Plane' or $movecat == 'Urgent' or  $movecat == 'Urgent / Same Plane' or $movecat == 'Wing: No Recall' or $movecat == 'Wing: No Recall / Same Plane' or $movecat == 'Wing: Urgent' or  $movecat == 'Wing: Urgent / Same Plane'">
+						<do_if value="$movecat == 'No Recall' or $movecat == 'No Recall / Same Plane' or $movecat == 'Urgent' or  $movecat == 'Urgent / Same Plane'">
 							<set_value name="$recall" exact="false" />
 						</do_if>
 						<do_else>
 							<set_value name="$recall" exact="true" />
 						</do_else>
 					
-						<do_if value="$movecat == 'Same Plane' or $movecat == 'Immediate / Same Plane' or $movecat == 'No Recall / Same Plane' or  $movecat == 'Urgent / Same Plane' or $movecat == 'Wing: Same Plane' or $movecat == 'Wing: Immediate / Same Plane' or $movecat == 'Wing: No Recall / Same Plane' or  $movecat == 'Wing: Urgent / Same Plane'">
+						<do_if value="$movecat == 'Same Plane' or $movecat == 'Immediate / Same Plane' or $movecat == 'No Recall / Same Plane' or  $movecat == 'Urgent / Same Plane'">
 							<set_value name="$sameplane" exact="true" />
 						</do_if>
 						<do_else>
 							<set_value name="$sameplane" exact="false" />
 						</do_else>
 		
-						<do_if value="$movecat == 'Urgent' or  $movecat == 'Urgent / Same Plane' or $movecat == 'Wing: Urgent' or  $movecat == 'Wing: Urgent / Same Plane'">
+						<do_if value="$movecat == 'Urgent' or  $movecat == 'Urgent / Same Plane'">
 							<set_value name="$noattackresp" exact="true" />
 						</do_if>
 						<do_else>
 							<set_value name="$noattackresp" exact="false" />
 						</do_else>
 
-						<do_if value="$movecat == 'Immediate' or $movecat == 'Immediate / Same Plane' or $movecat == 'Urgent' or  $movecat == 'Urgent / Same Plane' or $movecat == 'Wing: Immediate' or $movecat == 'Wing: Immediate / Same Plane' or $movecat == 'Wing: Urgent' or  $movecat == 'Wing: Urgent / Same Plane'">
+						<do_if value="$movecat == 'Immediate' or $movecat == 'Immediate / Same Plane' or $movecat == 'Urgent' or  $movecat == 'Urgent / Same Plane'">
 							<set_value name="$immed" exact="true" />
 						</do_if>
 						<do_else>
@@ -271,27 +281,32 @@
 							<do_else>
 								<set_value name="$orderships" exact="[@player.entity.$SelectedFleetCommander]" />
 							</do_else>
+							
+							<substitute_text text="$dockcat">
+								<replace string="'Wing: '" with="''" />
+							</substitute_text>
+							
 						</do_if>
 						<do_else>
 							<set_value name="$orderships" exact="@event.param.$selectedplayerships" />
 						</do_else>
 
 						
-						<do_if value="$dockcat == 'Urgent' or $dockcat == 'Wing: Urgent'">
+						<do_if value="$dockcat == 'Urgent'">
 							<set_value name="$recall" exact="false" />
 						</do_if>
 						<do_else>
 							<set_value name="$recall" exact="true" />
 						</do_else>
 												
-						<do_if value="$dockcat == 'Urgent' or $dockcat == 'Wing: Urgent'">
+						<do_if value="$dockcat == 'Urgent'">
 							<set_value name="$noattackresp" exact="true" />
 						</do_if>
 						<do_else>
 							<set_value name="$noattackresp" exact="false" />
 						</do_else>
 
-						<do_if value="$dockcat == 'Urgent' or $dockcat == 'Wing: Urgent'">
+						<do_if value="$dockcat == 'Urgent'">
 							<set_value name="$immed" exact="true" />
 						</do_if>
 						<do_else>
