@@ -151,7 +151,13 @@
 						<set_value name="$attackcat" exact="event.param.$echo" />
 						
 						<do_if value="$attackcat == 'Wing: Immediate' or $movecat == 'Wing: Attack'">
-							<set_value name="$orderships" exact="@player.occupiedship.subordinatesingroup.{player.entity.$SelectedWingID}" />
+							<do_if value="@player.entity.$SelectedWing and 
+								@player.entity.$SelectedFleetCommander.activesubordinategroupids.indexof.{@player.entity.$SelectedWingID}">						
+								<set_value name="$orderships" exact="@player.entity.$SelectedFleetCommander.subordinatesingroup.{@player.entity.$SelectedWingID}" />
+							</do_if>
+							<do_else>
+								<set_value name="$orderships" exact="[@player.entity.$SelectedFleetCommander]" />
+							</do_else>
 						</do_if>
 						<do_else>
 							<set_value name="$orderships" exact="@event.param.$selectedplayerships" />
@@ -188,7 +194,13 @@
 						<set_value name="$movecat" exact="event.param.$echo" />
 							
 						<do_if value="$movecat == 'Wing: Immediate' or $movecat == 'Wing: Immediate / Same Plane' or $movecat == 'Wing: Same Plane' or $movecat == 'Wing: No Recall' or  $movecat == 'Wing: No Recall / Same Plane' or $movecat == 'Wing: Urgent' or $movecat == 'Wing: Urgent / Same Plane'">
-							<set_value name="$orderships" exact="@player.occupiedship.subordinatesingroup.{player.entity.$SelectedWingID}" />
+							<do_if value="@player.entity.$SelectedWing and 
+								@player.entity.$SelectedFleetCommander.activesubordinategroupids.indexof.{@player.entity.$SelectedWingID}">						
+								<set_value name="$orderships" exact="@player.entity.$SelectedFleetCommander.subordinatesingroup.{@player.entity.$SelectedWingID}" />
+							</do_if>
+							<do_else>
+								<set_value name="$orderships" exact="[@player.entity.$SelectedFleetCommander]" />
+							</do_else>
 						</do_if>
 						<do_else>
 							<set_value name="$orderships" exact="@event.param.$selectedplayerships" />
@@ -252,7 +264,13 @@
 						<set_value name="$dockcat" exact="event.param.$echo" />
 
 						<do_if value="$dockcat == 'Wing: Urgent' or $dockcat == 'Wing: Dock'">
-							<set_value name="$orderships" exact="@player.occupiedship.subordinatesingroup.{player.entity.$SelectedWingID}" />
+							<do_if value="@player.entity.$SelectedWing and 
+								@player.entity.$SelectedFleetCommander.activesubordinategroupids.indexof.{@player.entity.$SelectedWingID}">						
+								<set_value name="$orderships" exact="@player.entity.$SelectedFleetCommander.subordinatesingroup.{@player.entity.$SelectedWingID}" />
+							</do_if>
+							<do_else>
+								<set_value name="$orderships" exact="[@player.entity.$SelectedFleetCommander]" />
+							</do_else>
 						</do_if>
 						<do_else>
 							<set_value name="$orderships" exact="@event.param.$selectedplayerships" />
