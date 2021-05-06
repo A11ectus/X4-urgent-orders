@@ -176,11 +176,11 @@
 						</do_else>
 						
 						<do_for_each name="$ship" in="@$orderships">						
-							<debug_text text="'$ship: ' + $ship + ' (' + @$ship.knownname + ')'" chance="alAWHK.$debugChance" />
+							<debug_text text="'$ship: ' + $ship + ' (' + @$ship.knownname + ')'" chance="alAUO.$debugChance" />
 							<do_if value="$ship">
 								<create_order name="$order" object="$ship" id="'Attack'" immediate="$immed">
 									<param name="primarytarget" value="$target" />
-									<param name="debugchance" value="alAWHK.$debugChance" />
+									<param name="debugchance" value="alAUO.$debugChance" />
 								</create_order>
 							</do_if>
 						</do_for_each>
@@ -245,7 +245,7 @@
 						</do_else>
 						
 						<do_for_each name="$ship" in="$orderships">
-							<debug_text text="'$ship: ' + $ship + ' (' + @$ship.knownname + ')'" chance="alAWHK.$debugChance" />
+							<debug_text text="'$ship: ' + $ship + ' (' + @$ship.knownname + ')'" chance="alAUO.$debugChance" />
 							<do_if value="$ship">
 							
 								<do_if value="$sameplane">
@@ -258,7 +258,7 @@
 									<param name="destination" value="$destfinal" />
 									<param name="recallsubordinates" value="$recall" />
 									<param name="noattackresponse" value="$noattackresp" />
-									<param name="debugchance" value="alAWHK.$debugChance" />
+									<param name="debugchance" value="alAUO.$debugChance" />
 								</create_order>
 							</do_if>
 						</do_for_each>
@@ -314,7 +314,7 @@
 						</do_else>
 						
 						<do_for_each name="$ship" in="@$orderships">						
-							<debug_text text="'$ship: ' + $ship + ' (' + @$ship.knownname + ')'" chance="alAWHK.$debugChance" />
+							<debug_text text="'$ship: ' + $ship + ' (' + @$ship.knownname + ')'" chance="alAUO.$debugChance" />
 							<do_if value="$ship">
 							
 								<debug_text text="'$ship: ' + $ship + ' $dockcat: ' + $dockcat + ' $recall: ' + $recall + ' $noattackresp: ' + $noattackresp + ' $immed: ' + $immed" />
@@ -322,7 +322,7 @@
 									<param name="destination" value="$destfinal" />
 									<param name="recallsubordinates" value="$recall" />
 									<param name="noattackresponse" value="$noattackresp" />
-									<param name="debugchance" value="alAWHK.$debugChance" />
+									<param name="debugchance" value="alAUO.$debugChance" />
 								</create_order>
 							</do_if>
 						</do_for_each>
