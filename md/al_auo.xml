@@ -192,76 +192,97 @@
 						<event_cue_signalled />
 					</conditions>
 					<actions>
-						<set_value name="$destobject" exact="event.param.$object" />
-						<set_value name="$destoffset" exact="event.param.$offset" />
-						<set_value name="$destoffsetcomponent" exact="event.param.$offsetcomponent" />
-						<set_value name="$destfinal" exact="[$destoffsetcomponent, $destoffset]" />
 						<set_value name="$movecat" exact="event.param.$echo" />
+						<set_value name="$doaction" exact="true" />
+						
+						<do_if value="event.param.$id == 'hk_move_urgent_whk'">
+							<set_value name="$destfinal" exact="[player.target, position.[0,0,0]]" />
 							
-						<do_if value="$movecat == 'Wing: Immediate' or $movecat == 'Wing: Immediate / Same Plane' or $movecat == 'Wing: Same Plane' or $movecat == 'Wing: No Recall' or  $movecat == 'Wing: No Recall / Same Plane' or $movecat == 'Wing: Urgent' or $movecat == 'Wing: Urgent / Same Plane'">
-							<do_if value="@player.entity.$SelectedWing and 
-								@player.entity.$SelectedFleetCommander.activesubordinategroupids.indexof.{@player.entity.$SelectedWingID}">						
-								<set_value name="$orderships" exact="@player.entity.$SelectedFleetCommander.subordinatesingroup.{@player.entity.$SelectedWingID}" />
+							<set_value name="$validselection" exact="((@player.entity.$SelectedFleetCommander and @player.entity.$SelectedFleetCommander != player.occupiedship) or (@player.entity.$SelectedWing and @player.entity.$SelectedFleetCommander.activesubordinategroupids.indexof.{@player.entity.$SelectedWingID}))" />
+							
+							<do_if value="@$destfinal and $validselection">
+								<speak actor="player.computer" page="10002" line="132" /> <!--"Command Accepted"-->
+								<show_notification text="player.entity.$SelectedFleet + '-' + player.entity.$SelectedWing + ': ' + {12115, 2006} + ' ' + {10002, 132}"/> <!--"Flt: Fly and Wait Urgent Command Accepted"-->
 							</do_if>
 							<do_else>
-								<set_value name="$orderships" exact="[@player.entity.$SelectedFleetCommander]" />
+								<speak actor="player.computer" page="10002" line="133" /> <!--"Command Rejected"-->
+								<show_notification text="player.entity.$SelectedFleet + '-' + player.entity.$SelectedWing + ': ' + {12115, 2006} + ' ' + {10002, 133}"/> <!--"Flt: Fly and Wait Urgent Command Rejected"-->								
+								<set_value name="$doaction" exact="false" />		
+							</do_else>
+						</do_if>
+						<do_else>
+							<set_value name="$destobject" exact="event.param.$object" />
+							<set_value name="$destoffset" exact="event.param.$offset" />
+							<set_value name="$destoffsetcomponent" exact="event.param.$offsetcomponent" />
+							<set_value name="$destfinal" exact="[$destoffsetcomponent, $destoffset]" />
+						</do_else>
+						
+						<do_if value="$doaction">								
+							<do_if value="$movecat == 'Wing: Immediate' or $movecat == 'Wing: Immediate / Same Plane' or $movecat == 'Wing: Same Plane' or $movecat == 'Wing: No Recall' or  $movecat == 'Wing: No Recall / Same Plane' or $movecat == 'Wing: Urgent' or $movecat == 'Wing: Urgent / Same Plane'">
+								<do_if value="@player.entity.$SelectedWing and 
+									@player.entity.$SelectedFleetCommander.activesubordinategroupids.indexof.{@player.entity.$SelectedWingID}">						
+									<set_value name="$orderships" exact="@player.entity.$SelectedFleetCommander.subordinatesingroup.{@player.entity.$SelectedWingID}" />
+								</do_if>
+								<do_else>
+									<set_value name="$orderships" exact="[@player.entity.$SelectedFleetCommander]" />
+								</do_else>
+								
+								<substitute_text text="$movecat">
+									<replace string="'Wing: '" with="''" />
+								</substitute_text>
+								
+							</do_if>
+							<do_else>
+								<set_value name="$orderships" exact="@event.param.$selectedplayerships" />
 							</do_else>
 							
-							<substitute_text text="$movecat">
-								<replace string="'Wing: '" with="''" />
-							</substitute_text>
-							
-						</do_if>
-						<do_else>
-							<set_value name="$orderships" exact="@event.param.$selectedplayerships" />
-						</do_else>
-						
-						<do_if value="$movecat == 'No Recall' or $movecat == 'No Recall / Same Plane' or $movecat == 'Urgent' or  $movecat == 'Urgent / Same Plane'">
-							<set_value name="$recall" exact="false" />
-						</do_if>
-						<do_else>
-							<set_value name="$recall" exact="true" />
-						</do_else>
-					
-						<do_if value="$movecat == 'Same Plane' or $movecat == 'Immediate / Same Plane' or $movecat == 'No Recall / Same Plane' or  $movecat == 'Urgent / Same Plane'">
-							<set_value name="$sameplane" exact="true" />
-						</do_if>
-						<do_else>
-							<set_value name="$sameplane" exact="false" />
-						</do_else>
-		
-						<do_if value="$movecat == 'Urgent' or  $movecat == 'Urgent / Same Plane'">
-							<set_value name="$noattackresp" exact="true" />
-						</do_if>
-						<do_else>
-							<set_value name="$noattackresp" exact="false" />
-						</do_else>
-
-						<do_if value="$movecat == 'Immediate' or $movecat == 'Immediate / Same Plane' or $movecat == 'Urgent' or  $movecat == 'Urgent / Same Plane'">
-							<set_value name="$immed" exact="true" />
-						</do_if>
-						<do_else>
-							<set_value name="$immed" exact="false" />
-						</do_else>
-						
-						<do_for_each name="$ship" in="$orderships">
-							<debug_text text="'$ship: ' + $ship + ' (' + @$ship.knownname + ')'" chance="alAUO.$debugChance" />
-							<do_if value="$ship">
-							
-								<do_if value="$sameplane">
-									<set_value name="$destoffsetmod" exact="position.[$destoffset.x, $ship.relativeposition.{$destoffsetcomponent}.y, $destoffset.z]" />
-									<set_value name="$destfinal" exact="[$destoffsetcomponent, $destoffsetmod]" />
-									
-								</do_if>
-														
-								<create_order name="$order" object="$ship" id="'MoveWait'" immediate="$immed">
-									<param name="destination" value="$destfinal" />
-									<param name="recallsubordinates" value="$recall" />
-									<param name="noattackresponse" value="$noattackresp" />
-									<param name="debugchance" value="alAUO.$debugChance" />
-								</create_order>
+							<do_if value="$movecat == 'No Recall' or $movecat == 'No Recall / Same Plane' or $movecat == 'Urgent' or  $movecat == 'Urgent / Same Plane'">
+								<set_value name="$recall" exact="false" />
 							</do_if>
-						</do_for_each>
+							<do_else>
+								<set_value name="$recall" exact="true" />
+							</do_else>
+						
+							<do_if value="$movecat == 'Same Plane' or $movecat == 'Immediate / Same Plane' or $movecat == 'No Recall / Same Plane' or  $movecat == 'Urgent / Same Plane'">
+								<set_value name="$sameplane" exact="true" />
+							</do_if>
+							<do_else>
+								<set_value name="$sameplane" exact="false" />
+							</do_else>
+			
+							<do_if value="$movecat == 'Urgent' or  $movecat == 'Urgent / Same Plane'">
+								<set_value name="$noattackresp" exact="true" />
+							</do_if>
+							<do_else>
+								<set_value name="$noattackresp" exact="false" />
+							</do_else>
+
+							<do_if value="$movecat == 'Immediate' or $movecat == 'Immediate / Same Plane' or $movecat == 'Urgent' or  $movecat == 'Urgent / Same Plane'">
+								<set_value name="$immed" exact="true" />
+							</do_if>
+							<do_else>
+								<set_value name="$immed" exact="false" />
+							</do_else>
+							
+							<do_for_each name="$ship" in="$orderships">
+								<debug_text text="'$ship: ' + $ship + ' (' + @$ship.knownname + ')'" chance="alAUO.$debugChance" />
+								<do_if value="$ship">
+								
+									<do_if value="$sameplane">
+										<set_value name="$destoffsetmod" exact="position.[$destoffset.x, $ship.relativeposition.{$destoffsetcomponent}.y, $destoffset.z]" />
+										<set_value name="$destfinal" exact="[$destoffsetcomponent, $destoffsetmod]" />
+										
+									</do_if>
+															
+									<create_order name="$order" object="$ship" id="'MoveWait'" immediate="$immed">
+										<param name="destination" value="$destfinal" />
+										<param name="recallsubordinates" value="$recall" />
+										<param name="noattackresponse" value="$noattackresp" />
+										<param name="debugchance" value="alAUO.$debugChance" />
+									</create_order>
+								</do_if>
+							</do_for_each>
+						</do_if>
 						<reset_cue cue="this" />
 					</actions>
 				</cue>				
@@ -270,62 +291,83 @@
 						<event_cue_signalled />
 					</conditions>
 					<actions>
-						<set_value name="$destfinal" exact="event.param.$object" />
 						<set_value name="$dockcat" exact="event.param.$echo" />
+						<set_value name="$doaction" exact="true" />
 
-						<do_if value="$dockcat == 'Wing: Urgent' or $dockcat == 'Wing: Dock'">
-							<do_if value="@player.entity.$SelectedWing and 
-								@player.entity.$SelectedFleetCommander.activesubordinategroupids.indexof.{@player.entity.$SelectedWingID}">						
-								<set_value name="$orderships" exact="@player.entity.$SelectedFleetCommander.subordinatesingroup.{@player.entity.$SelectedWingID}" />
+						<do_if value="event.param.$id == 'hk_dock_urgent_whk'">
+							<set_value name="$destfinal" exact="player.target" />
+							
+							<set_value name="$validselection" exact="((@player.entity.$SelectedFleetCommander and @player.entity.$SelectedFleetCommander != player.occupiedship) or (@player.entity.$SelectedWing and @player.entity.$SelectedFleetCommander.activesubordinategroupids.indexof.{@player.entity.$SelectedWingID}))" />
+
+							<do_if value="@$destfinal and @$destfinal.dockingallowed.{@player.entity.$SelectedFleetCommander} and $validselection">
+								<speak actor="player.computer" page="10002" line="132" /> <!--"Command Accepted"-->
+								<show_notification text="player.entity.$SelectedFleet + '-' + player.entity.$SelectedWing + ': ' + {12115, 2008} + ' ' + {10002, 132}"/> <!--"Flt: Dock and Wait Urgent Command Accepted"-->
 							</do_if>
 							<do_else>
-								<set_value name="$orderships" exact="[@player.entity.$SelectedFleetCommander]" />
+								<speak actor="player.computer" page="10002" line="133" /> <!--"Command Rejected"-->
+								<show_notification text="player.entity.$SelectedFleet + '-' + player.entity.$SelectedWing + ': ' + {12115, 2008} + ' ' + {10002, 133}"/> <!--"Flt: Dock and Wait Urgent Command Rejected"-->
+								<set_value name="$doaction" exact="false" />		
+							</do_else>
+						</do_if>
+						<do_else>
+							<set_value name="$destfinal" exact="event.param.$object" />
+						</do_else>
+						
+						<do_if value="$doaction">												
+							<do_if value="$dockcat == 'Wing: Urgent' or $dockcat == 'Wing: Dock'">
+								<do_if value="@player.entity.$SelectedWing and 
+									@player.entity.$SelectedFleetCommander.activesubordinategroupids.indexof.{@player.entity.$SelectedWingID}">						
+									<set_value name="$orderships" exact="@player.entity.$SelectedFleetCommander.subordinatesingroup.{@player.entity.$SelectedWingID}" />
+								</do_if>
+								<do_else>
+									<set_value name="$orderships" exact="[@player.entity.$SelectedFleetCommander]" />
+								</do_else>
+								
+								<substitute_text text="$dockcat">
+									<replace string="'Wing: '" with="''" />
+								</substitute_text>
+								
+							</do_if>
+							<do_else>
+								<set_value name="$orderships" exact="@event.param.$selectedplayerships" />
+							</do_else>
+
+							
+							<do_if value="$dockcat == 'Urgent'">
+								<set_value name="$recall" exact="false" />
+							</do_if>
+							<do_else>
+								<set_value name="$recall" exact="true" />
+							</do_else>
+													
+							<do_if value="$dockcat == 'Urgent'">
+								<set_value name="$noattackresp" exact="true" />
+							</do_if>
+							<do_else>
+								<set_value name="$noattackresp" exact="false" />
+							</do_else>
+
+							<do_if value="$dockcat == 'Urgent'">
+								<set_value name="$immed" exact="true" />
+							</do_if>
+							<do_else>
+								<set_value name="$immed" exact="false" />
 							</do_else>
 							
-							<substitute_text text="$dockcat">
-								<replace string="'Wing: '" with="''" />
-							</substitute_text>
-							
+							<do_for_each name="$ship" in="@$orderships">						
+								<debug_text text="'$ship: ' + $ship + ' (' + @$ship.knownname + ')'" chance="alAUO.$debugChance" />
+								<do_if value="$ship">
+								
+									<debug_text text="'$ship: ' + $ship + ' $dockcat: ' + $dockcat + ' $recall: ' + $recall + ' $noattackresp: ' + $noattackresp + ' $immed: ' + $immed" />
+									<create_order name="$order" object="$ship" id="'DockAndWait'" immediate="$immed">
+										<param name="destination" value="$destfinal" />
+										<param name="recallsubordinates" value="$recall" />
+										<param name="noattackresponse" value="$noattackresp" />
+										<param name="debugchance" value="alAUO.$debugChance" />
+									</create_order>
+								</do_if>
+							</do_for_each>
 						</do_if>
-						<do_else>
-							<set_value name="$orderships" exact="@event.param.$selectedplayerships" />
-						</do_else>
-
-						
-						<do_if value="$dockcat == 'Urgent'">
-							<set_value name="$recall" exact="false" />
-						</do_if>
-						<do_else>
-							<set_value name="$recall" exact="true" />
-						</do_else>
-												
-						<do_if value="$dockcat == 'Urgent'">
-							<set_value name="$noattackresp" exact="true" />
-						</do_if>
-						<do_else>
-							<set_value name="$noattackresp" exact="false" />
-						</do_else>
-
-						<do_if value="$dockcat == 'Urgent'">
-							<set_value name="$immed" exact="true" />
-						</do_if>
-						<do_else>
-							<set_value name="$immed" exact="false" />
-						</do_else>
-						
-						<do_for_each name="$ship" in="@$orderships">						
-							<debug_text text="'$ship: ' + $ship + ' (' + @$ship.knownname + ')'" chance="alAUO.$debugChance" />
-							<do_if value="$ship">
-							
-								<debug_text text="'$ship: ' + $ship + ' $dockcat: ' + $dockcat + ' $recall: ' + $recall + ' $noattackresp: ' + $noattackresp + ' $immed: ' + $immed" />
-								<create_order name="$order" object="$ship" id="'DockAndWait'" immediate="$immed">
-									<param name="destination" value="$destfinal" />
-									<param name="recallsubordinates" value="$recall" />
-									<param name="noattackresponse" value="$noattackresp" />
-									<param name="debugchance" value="alAUO.$debugChance" />
-								</create_order>
-							</do_if>
-						</do_for_each>
 						<reset_cue cue="this" />
 					</actions>
 				</cue>								
