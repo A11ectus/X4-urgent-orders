@@ -138,6 +138,19 @@
 									$echo='Immediate'
 								]" />
 							</do_if>	
+							
+							<do_if value="$target">	
+								<set_value name="$text" exact="{12115, 2009}" comment="Attack Targets in Range, Immediate" />
+								<signal_cue_instantly cue="md.Interact_Menu_API.Add_Action" param = "table[
+									$id = 'order_attackinrange_immediate',
+									$section = $section,
+									$text = $text,
+									$icon = 'order_attackinrange',
+									$callback = InteractMenu_OnAttackInRangeUrgent,
+									$echo='Immediate'
+								]" />							
+							</do_if>
+							
 						</do_if>
 						<cancel_cue cue="this" />
 					</actions>
@@ -150,7 +163,7 @@
 						<set_value name="$target" exact="event.param.$object" />
 						<set_value name="$attackcat" exact="event.param.$echo" />
 						
-						<do_if value="$attackcat == 'Wing: Immediate' or $movecat == 'Wing: Attack'">
+						<do_if value="$attackcat == 'Wing: Immediate' or $attackcat == 'Wing: Attack'">
 							<do_if value="@player.entity.$SelectedWing and 
 								@player.entity.$SelectedFleetCommander.activesubordinategroupids.indexof.{@player.entity.$SelectedWingID}">						
 								<set_value name="$orderships" exact="@player.entity.$SelectedFleetCommander.subordinatesingroup.{@player.entity.$SelectedWingID}" />
@@ -186,7 +199,56 @@
 						</do_for_each>
 						<reset_cue cue="this" />
 					</actions>
-				</cue>	
+				</cue>
+				<cue name="InteractMenu_OnAttackInRangeUrgent">
+					<conditions>
+						<event_cue_signalled />
+					</conditions>
+					<actions>
+						<set_value name="$attackcat" exact="event.param.$echo" />
+						
+						<set_value name="$destoffset" exact="event.param.$offset" />
+						<set_value name="$destoffsetcomponent" exact="event.param.$offsetcomponent" />
+						<set_value name="$destfinal" exact="[$destoffsetcomponent, $destoffset]" />
+						
+						<do_if value="$attackcat == 'Wing: Immediate' or $attackcat == 'Wing: Attack'">
+							<do_if value="@player.entity.$SelectedWing and 
+								@player.entity.$SelectedFleetCommander.activesubordinategroupids.indexof.{@player.entity.$SelectedWingID}">						
+								<set_value name="$orderships" exact="@player.entity.$SelectedFleetCommander.subordinatesingroup.{@player.entity.$SelectedWingID}" />
+							</do_if>
+							<do_else>
+								<set_value name="$orderships" exact="[@player.entity.$SelectedFleetCommander]" />
+							</do_else>
+							
+							<substitute_text text="$attackcat">
+								<replace string="'Wing: '" with="''" />
+							</substitute_text>
+							
+						</do_if>
+						<do_else>
+							<set_value name="$orderships" exact="@event.param.$selectedplayerships" />
+						</do_else>
+								
+						<do_if value="$attackcat == 'Immediate'">
+							<set_value name="$immed" exact="true" />
+						</do_if>
+						<do_else>
+							<set_value name="$immed" exact="false" />
+						</do_else>
+								
+						<do_for_each name="$ship" in="$orderships">
+							<debug_text text="'$ship: ' + $ship + ' (' + @$ship.knownname + ')'" chance="alAUO.$debugChance" />
+							<do_if value="$ship">
+								<create_order name="$order" object="$ship" id="'AttackInRange'" immediate="$immed">
+									<param name="destination" value="$destfinal" />
+									<param name="debugchance" value="alAUO.$debugChance" />
+								</create_order>
+							</do_if>
+						</do_for_each>
+						
+						<reset_cue cue="this" />
+					</actions>
+				</cue>					
 				<cue name="InteractMenu_OnMoveUrgent">
 					<conditions>
 						<event_cue_signalled />
