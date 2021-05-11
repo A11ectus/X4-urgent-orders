@@ -2,7 +2,7 @@ Urgent Orders:
 ============
 By: Allectus
 
-Translation: FAIL! Chapi (DE)
+Translation: FAIL! Chapi (DE), TiomTang (CN)
 
 Github: https://github.com/A11ectus/X4-urgent-orders
 Steam: https://steamcommunity.com/sharedfiles/filedetails/?id=2459574093
@@ -65,4 +65,4 @@ History:
 ========
 1.0, 2021-04-17: Initial release
 1.1, 2021-04-18: Added DE translation; Added "Dock and Wait, Urgent"; Allowed "Fly..." commands to take other objects as targets; Fixed bug in "...Urgent" commands that would cause them to not properly ignore attacks
-1.2, 2021-05-11: Added support for Wing Hotkeys Mod; Added Attack Targets in Range, Immediate command; Corrected position offset error when camera was tilted
+1.2, 2021-05-11: Added support for Wing Hotkeys Mod; Added Attack Targets in Range, Immediate command; Corrected position offset error when camera was tilted; Added CN translation
