@@ -205,11 +205,19 @@
 						<event_cue_signalled />
 					</conditions>
 					<actions>
-						<set_value name="$attackcat" exact="event.param.$echo" />
+						<set_value name="$attackcat" exact="event.param.$echo" />						
+						<set_value name="$destobject" exact="event.param.$object" />
 						
-						<set_value name="$destoffset" exact="event.param.$offset" />
-						<set_value name="$destoffsetcomponent" exact="event.param.$offsetcomponent" />
-						<set_value name="$destfinal" exact="[$destoffsetcomponent, $destoffset]" />
+						<do_if value="$destobject.isclass.sector">
+							<set_value name="$destoffsetcomponent" exact="event.param.$offsetcomponent" />
+							<set_value name="$destoffset" exact="event.param.$offset" />
+						</do_if>
+						<do_else>
+							<set_value name="$destoffsetcomponent" exact="$destobject.sector" />
+							<set_value name="$destoffset" exact="$destobject.relativeposition.{$destoffsetcomponent}" />
+						</do_else>
+						
+						<set_value name="$destfinal" exact="[$destoffsetcomponent, $destoffset]" />	
 						
 						<do_if value="$attackcat == 'Wing: Immediate' or $attackcat == 'Wing: Attack'">
 							<do_if value="@player.entity.$SelectedWing and 
@@ -258,7 +266,10 @@
 						<set_value name="$doaction" exact="true" />
 						
 						<do_if value="event.param.$id == 'hk_move_urgent_whk'">
-							<set_value name="$destfinal" exact="[player.target, position.[0,0,0]]" />
+							<set_value name="$destobject" exact="player.target" />
+							<set_value name="$destoffsetcomponent" exact="@$destobject.sector" />
+							<set_value name="$destoffset" exact="@$destobject.relativeposition.{@$destoffsetcomponent}" />
+							<set_value name="$destfinal" exact="[@$destoffsetcomponent, @$destoffset]" />	
 							
 							<set_value name="$validselection" exact="((@player.entity.$SelectedFleetCommander and @player.entity.$SelectedFleetCommander != player.occupiedship) or (@player.entity.$SelectedWing and @player.entity.$SelectedFleetCommander.activesubordinategroupids.indexof.{@player.entity.$SelectedWingID}))" />
 							
@@ -274,9 +285,17 @@
 						</do_if>
 						<do_else>
 							<set_value name="$destobject" exact="event.param.$object" />
-							<set_value name="$destoffset" exact="event.param.$offset" />
-							<set_value name="$destoffsetcomponent" exact="event.param.$offsetcomponent" />
-							<set_value name="$destfinal" exact="[$destoffsetcomponent, $destoffset]" />
+							
+							<do_if value="$destobject.isclass.sector">
+								<set_value name="$destoffsetcomponent" exact="event.param.$offsetcomponent" />
+								<set_value name="$destoffset" exact="event.param.$offset" />
+							</do_if>
+							<do_else>
+								<set_value name="$destoffsetcomponent" exact="$destobject.sector" />
+								<set_value name="$destoffset" exact="$destobject.relativeposition.{$destoffsetcomponent}" />
+							</do_else>
+							
+							<set_value name="$destfinal" exact="[$destoffsetcomponent, $destoffset]" />	
 						</do_else>
 						
 						<do_if value="$doaction">								
@@ -333,7 +352,6 @@
 									<do_if value="$sameplane">
 										<set_value name="$destoffsetmod" exact="position.[$destoffset.x, $ship.relativeposition.{$destoffsetcomponent}.y, $destoffset.z]" />
 										<set_value name="$destfinal" exact="[$destoffsetcomponent, $destoffsetmod]" />
-										
 									</do_if>
 															
 									<create_order name="$order" object="$ship" id="'MoveWait'" immediate="$immed">
