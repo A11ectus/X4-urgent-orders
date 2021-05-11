@@ -14,7 +14,11 @@ Adds additional high priority orders to the right click menu: Attack-Immediate, 
 
 Requirements:
 =============
-SirNukes Mod Suppot API
+SirNukes' Mod Support API - https://www.nexusmods.com/x4foundations/mods/503
+	Required for right click menu integration
+
+(Optional) My Wing Hotkeys mod - 
+	If present will provide fleet and wing quick select options and hotkeys for the orders below
 
 What the mod does:
 ==================
