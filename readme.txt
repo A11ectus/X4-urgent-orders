@@ -17,7 +17,7 @@ Requirements:
 SirNukes' Mod Support API - https://www.nexusmods.com/x4foundations/mods/503
 	Required for right click menu integration
 
-(Optional) My Wing Hotkeys mod - 
+(Optional) My Wing Hotkeys mod - https://steamcommunity.com/sharedfiles/filedetails/?id=2484521478
 	If present will provide fleet and wing quick select options and hotkeys for the orders below
 
 What the mod does:
@@ -26,6 +26,8 @@ What the mod does:
 This mod adds several orders to the right click menu:
 
 * AI Order: Attack, Immediate -- Attack, with order placed at the front of the order queue
+
+* AI Order: Attack Targets in Range, Immediate -- Attack all targets within a 40km sphere, with order placed at the front of the order queue
 
 * AI Order: Fly and Wait, Immediate -- Fly and Wait, with order placed at the front of the order queue
 
