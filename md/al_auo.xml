@@ -44,7 +44,7 @@
 							<set_value name="$section" exact="'selected_orders'" />						
 							
 							<do_if value="$target">	
-								<set_value name="$text" exact="{12115, 2001}" comment="Fly and Wait, Immediate" />
+								<set_value name="$text" exact="{12115, 2001}" comment="{12115, 3001}" />
 								<signal_cue_instantly cue="md.Interact_Menu_API.Add_Action" param = "table[
 									$id = 'order_move_immediate',
 									$section = $section,
@@ -54,7 +54,7 @@
 									$echo='Immediate'
 								]" />
 
-								<set_value name="$text" exact="{12115, 2002}" comment="Fly and Wait, Immediate/Same Plane" />
+								<set_value name="$text" exact="{12115, 2002}" comment="{12115, 3002}" />
 								<signal_cue_instantly cue="md.Interact_Menu_API.Add_Action" param = "table[
 									$id = 'order_move_immediatesameplane',
 									$section = $section,
@@ -64,7 +64,7 @@
 									$echo='Immediate / Same Plane'
 								]" />
 
-								<set_value name="$text" exact="{12115, 2003}" comment="Fly and Wait, Same Plane" />
+								<set_value name="$text" exact="{12115, 2003}" comment="{12115, 3003}" />
 								<signal_cue_instantly cue="md.Interact_Menu_API.Add_Action" param = "table[
 									$id = 'order_move_sameplane',
 									$section = $section,
@@ -74,7 +74,7 @@
 									$echo='Same Plane'
 								]" />
 								
-								<set_value name="$text" exact="{12115, 2004}" comment="Fly and Wait, No Recall" />
+								<set_value name="$text" exact="{12115, 2004}" comment="{12115, 3004}" />
 								<signal_cue_instantly cue="md.Interact_Menu_API.Add_Action" param = "table[
 									$id = 'order_move_norecall',
 									$section = $section,
@@ -84,7 +84,7 @@
 									$echo='No Recall'
 								]" />
 
-								<set_value name="$text" exact="{12115, 2005}" comment="Fly and Wait, No Recall/Same Plane" />
+								<set_value name="$text" exact="{12115, 2005}" comment="{12115, 3005}" />
 								<signal_cue_instantly cue="md.Interact_Menu_API.Add_Action" param = "table[
 									$id = 'order_move_norecallsameplane',
 									$section = $section,
@@ -94,7 +94,7 @@
 									$echo='No Recall / Same Plane'
 								]" />							
 
-								<set_value name="$text" exact="{12115, 2006}" comment="Fly and Wait, Urgent" />
+								<set_value name="$text" exact="{12115, 2006}" comment="{12115, 3006}" />
 								<signal_cue_instantly cue="md.Interact_Menu_API.Add_Action" param = "table[
 									$id = 'order_move_urgent',
 									$section = $section,
@@ -104,7 +104,7 @@
 									$echo='Urgent'
 								]" />															
 								
-								<set_value name="$text" exact="{12115, 2007}" comment="Fly and Wait, Urgent/Same Plane" />
+								<set_value name="$text" exact="{12115, 2007}" comment="{12115, 3007}" />
 								<signal_cue_instantly cue="md.Interact_Menu_API.Add_Action" param = "table[
 									$id = 'order_move_urgentsameplane',
 									$section = $section,
@@ -116,7 +116,7 @@
 							</do_if>
 							
 							<do_if value="@$target.dockingallowed.{$ship}">	
-								<set_value name="$text" exact="'Dock and Wait, Urgent'" comment="Dock and Wait, Urgent" />
+								<set_value name="$text" exact="{12115, 2008}" comment="{12115, 3008}" />
 								<signal_cue_instantly cue="md.Interact_Menu_API.Add_Action" param = "table[
 									$id = 'order_dock_urgent',
 									$section = $section,
@@ -128,7 +128,7 @@
 							</do_if>
 							
 							<do_if value="($target.isclass.destructible) and (not ($target.owner == faction.player))">	
-								<set_value name="$text" exact="{12115, 2000}" comment="Attack, Immediate" />
+								<set_value name="$text" exact="{12115, 2000}" comment="{12115, 3000}" />
 								<signal_cue_instantly cue="md.Interact_Menu_API.Add_Action" param = "table[
 									$id = 'order_attack_immediate',
 									$section = $section,
@@ -140,7 +140,7 @@
 							</do_if>	
 							
 							<do_if value="$target">	
-								<set_value name="$text" exact="{12115, 2009}" comment="Attack Targets in Range, Immediate" />
+								<set_value name="$text" exact="{12115, 2009}" comment="{12115, 3009}" />
 								<signal_cue_instantly cue="md.Interact_Menu_API.Add_Action" param = "table[
 									$id = 'order_attackinrange_immediate',
 									$section = $section,
