@@ -9,14 +9,14 @@
 		<t id="3">Do debug function</t>
 		<!-- orders -->
 		<t id="2000">Angriff, sofort</t>
-		<t id="2001">Hinfliegen und warten, sofort</t>
-		<t id="2002">Hinfliegen und warten, sofort/gleiche Höhe</t>
-		<t id="2003">Hinfliegen und warten, gleiche Höhe</t>
-		<t id="2004">Hinfliegen und warten, kein Rückruf</t>
-		<t id="2005">Hinfliegen und warten, kein Rückruf/gleiche Höhe</t>
-		<t id="2006">Hinfliegen und warten, dringend</t>
-		<t id="2007">Hinfliegen und warten, dringend/gleiche Höhe</t>
-		<t id="2008">Andocken und warten, dringend</t>		
+		<t id="2001">Hinfliegen &amp; warten:sofort</t>
+		<t id="2002">Hinfliegen &amp; warten:sofort/Ebene</t>
+		<t id="2003">Hinfliegen &amp; warten:gleiche Höhe</t>
+		<t id="2004">Hinfliegen &amp; warten:kein Rückruf</t>
+		<t id="2005">Hinfliegen &amp; warten:kein Rückruf/Ebene</t>
+		<t id="2006">Hinfliegen &amp; warten:dringend</t>
+		<t id="2007">Hinfliegen &amp; warten:dringend/Ebene</t>
+		<t id="2008">Andocken &amp; warten:dringend</t>		
 		<t id="2009">Greife Ziele in Reichweite an, sofort</t>		
 		<!-- Description -->		
 		<t id="3000">Angriff, sofort</t>
